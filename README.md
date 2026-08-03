@@ -15,9 +15,14 @@ Objetivo del Front-end: Diseñar e implementar una interfaz móvil intuitiva, ac
 6. Comunicados:  novedades publicadas por instructores.
 
  Equipo de Trabajo (ADSO 3409609)
-Omar Andrés Mayorga Cruz - Auditor de evidencia- usuario:ElOmar2702
-Julián Felipe Riaño Guerrero - Responsable del repositorio- usuario:JulianR323
-Tania Fernanda Trujillo Neira- Responsable de la rama -usuario:tanisfernanda
+*Omar Andrés Mayorga Cruz
+- Auditor de evidencia- usuario:ElOmar2702
+  
+*Julián Felipe Riaño Guerrero
+- Responsable del repositorio- usuario:JulianR323
+  
+*Tania Fernanda Trujillo Neira
+- Responsable de la rama -usuario:tanisfernanda
 
  Ruta Tecnológica Prevista
 Estructura y Diseño UI: HTML & CSS 
