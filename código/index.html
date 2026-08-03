@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>No Te Estrelles - Proyecto Escolar</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="barra-navegacion">
+    <div class="logo">
+      <div class="cuadrado-logo"></div>
+      <span class="texto-logo" onclick="window.location.href='index.html'" style="cursor:pointer;">No Te Estrelles</span>
+    </div>
+    
+    <div class="menu-enlaces">
+      <a href="examenes.html">Exámenes</a>
+      <a href="temarios.html">Temarios</a>
+      <a href="mapa.html">Mapa</a>
+      <a href="articulos.html">Artículos</a>
+      <a href="videos.html">Videos</a>
+      <a href="#resumenes">Resúmenes</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#" id="enlace-perfil-nav" onclick="mostrarVentana('ventana-perfil')" style="display:none; color: #f5c518; font-weight: bold;">👤 Mi Perfil</a>
+    </div>
+    
+    <div class="botones-entrar" id="auth-botones">
+      <button class="boton-blanco" onclick="mostrarVentana('ventana-login')">Iniciar sesión</button>
+      <button class="boton-amarillo" onclick="mostrarVentana('ventana-registro')">Registrarse</button>
+    </div>
+
+    <div class="botones-entrar" id="user-logeado" style="display:none; color: white; font-size: 0.9rem; align-items: center; gap: 10px;">
+      <span>¡Hola, <strong id="user-nav-name">Estudiante</strong>!</span>
+      <button class="boton-blanco" style="padding: 5px 10px; font-size: 0.8rem;" onclick="cerrarSession()">Salir</button>
+    </div>
+    
+    <button class="boton-menu" id="botonMenu">&#9776;</button>
+  </div>
+
+  <div class="menu-celular" id="menuCelular">
+    <a href="examenes.html">Exámenes</a>
+    <a href="temarios.html">Temarios</a>
+    <a href="mapa.html">Mapa</a>
+    <a href="#articulos">Artículos</a>
+    <a href="#videos">Videos</a>
+    <a href="#resumenes">Resúmenes</a>
+    <a href="#contacto">Contacto</a>
+    <a href="#" id="enlace-perfil-cel" onclick="mostrarVentana('ventana-perfil')" style="display:none; color: #f5c518;">👤 Mi Perfil</a>
+    <div class="botones-celular" id="auth-botones-cel">
+      <button class="boton-blanco" onclick="mostrarVentana('ventana-login')">Iniciar sesión</button>
+      <button class="boton-amarillo" onclick="mostrarVentana('ventana-registro')">Registrarse</button>
+    </div>
+  </div>
+
+  <div class="principal">
+    <h1 class="titulo-grande">Prepárate y aprueba tu examen de conducción</h1>
+    <p class="subtitulo">Simulacros, señales de tránsito, resúmenes y más. Todo lo que necesitas en un solo lugar.</p>
+
+    <div style="margin-bottom: 25px; display: flex; justify-content: center; gap: 5px; width: 100%; padding: 0 15px; box-sizing: border-box;">
+      <input type="text" id="buscador-global" placeholder="¿Qué tema quieres buscar hoy? (Ej: señales, velocidad)" style="padding: 12px 15px; width: 100%; max-width: 350px; border-radius: 8px; border: none; font-size: 0.95rem; color: #333;" />
+      <button class="boton-amarillo" onclick="buscarTemaGlobal()" style="padding: 12px 20px; white-space: nowrap;">Buscar</button>
+    </div>
+
+    <div style="background: rgba(255,255,255,0.12); max-width: 480px; margin: 0 auto 30px auto; padding: 12px; border-radius: 10px; border: 1px dashed rgba(255,255,255,0.25);">
+      <span style="font-size: 0.88rem; color: #fff; margin-right: 10px;">¿Quieres mantener una preparación constante?</span>
+      <button class="boton-amarillo" style="padding: 5px 12px; font-size: 0.8rem;" onclick="activarRecordatorios()">Activar Alertas</button>
+    </div>
+
+    <div class="caja-simulador">
+      <span class="etiqueta">Simulador →</span>
+      <button class="boton-grande" onclick="mostrarVentana('ventana-simulador')">Iniciar simulacro</button>
+    </div>
+
+    <div class="tarjetas-rapidas">
+      <div class="tarjeta-chica" onclick="window.location.href='temarios.html'" style="cursor:pointer;">
+        <div class="icono-tarjeta" style="background:#c8e6c9;"></div>
+        <span>Material de estudio</span>
+      </div>
+      <div class="tarjeta-chica" onclick="alert('Abriendo mapa interactivo de centros viales.');" style="cursor:pointer;">
+        <div class="icono-tarjeta" style="background:#bbdefb;"></div>
+        <span>Mapa</span>
+      </div>
+      <div class="tarjeta-chica" onclick="alert('Consultor IA: Escribe tus dudas normativas.');" style="cursor:pointer;">
+        <div class="icono-tarjeta" style="background:#ffe0b2;"></div>
+        <span>Consultor de dudas</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="seccion-numeros">
+    <div class="dato">
+      <span class="numero" id="num-usuarios">10000</span>
+      <span class="texto-dato">Usuarios registrados</span>
+    </div>
+    <div class="dato">
+      <span class="numero" id="num-simulacros">5000</span>
+      <span class="texto-dato">Simulacros realizados</span>
+    </div>
+    <div class="dato">
+      <span class="numero" id="num-aprobacion">94</span>
+      <span class="texto-dato">Tasa de aprobación</span>
+    </div>
+  </div>
+
+  <div class="seccion-resumenes" id="resumenes">
+    <h2 class="titulo-seccion">RESÚMENES</h2>
+    <div class="cuadricula-resumenes">
+      
+      <div class="tarjeta-resumen">
+        <div class="foto-tarjeta" style="background:#e3f2fd;"></div>
+        <h3>Señales de tránsito</h3>
+        <p>Aprende a identificar todas las señales reglamentarias, preventivas e informativas.</p>
+        <a href="#" class="enlace-leer" onclick="alert('Resumen: Reglamentarias (rojas/prohibición), Preventivas (amarillas/peligro), Informativas (azules/guía).');">Ver resumen →</a>
+      </div>
+
+      <div class="tarjeta-resumen">
+        <div class="foto-tarjeta" style="background:#f3e5f5;"></div>
+        <h3>Normas de circulación</h3>
+        <p>Velocidades, prioridades, distancias de seguridad y más normas esenciales.</p>
+        <a href="#" class="enlace-leer" onclick="alert('Resumen: Límites urbanos generales y prelación derecha en cruces no regulados.');">Ver resumen →</a>
+      </div>
+
+      <div class="tarjeta-resumen">
+        <div class="foto-tarjeta" style="background:#e8f5e9;"></div>
+        <h3>Seguridad vial</h3>
+        <p>Consejos y reglas para una conducción responsable y segura en todo momento.</p>
+        <a href="#" class="enlace-leer" onclick="alert('Resumen: Seguridad activa (frenos/llantas) y pasiva (airbag/cinturón).');">Ver resumen →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="pie-pagina" id="contacto">
+    <div class="contenido-pie">
+      <div class="marca-pie">
+        <span class="texto-logo">No Te Estrelles</span>
+        <p>Plataforma de preparación para el examen teórico de conducción.</p>
+      </div>
+      <div class="enlaces-pie">
+        <strong>Secciones</strong>
+        <a href="examenes.html">Exámenes</a>
+        <a href="temarios.html">Temarios</a>
+        <a href="#resumenes">Resúmenes</a>
+        <a href="#videos">Videos</a>
+      </div>
+      <div class="enlaces-pie">
+        <strong>Contacto</strong>
+        <a href="mailto:info@noteestrelles.com">info@noteestrelles.com</a>
+        <a href="#" onclick="alert('Reportar pregunta: Envía el ID de la pregunta confusa para su revisión inmediata.');">Reportar pregunta</a>
+      </div>
+    </div>
+    <p class="derechos">© 2026 No te estrelles · Todos los derechos reservados</p>
+  </div>
+
+  <button class="boton-flotante" title="Contacto" onclick="mostrarVentana('ventana-contacto')"></button>
+
+  <div class="fondo-ventana" id="ventana-login">
+    <div class="ventana">
+      <button class="boton-cerrar" onclick="ocultarVentana('ventana-login')">✕</button>
+      <h2>Iniciar sesión</h2>
+      <div class="campo">
+        <label>Correo electrónico</label>
+        <input type="email" id="txt-login-email" placeholder="correo@ejemplo.com" required/>
+      </div>
+      <div class="campo">
+        <label>Contraseña</label>
+        <input type="password" placeholder="••••••••" required/>
+      </div>
+      <a href="#" class="enlace-olvido" onclick="recuperarClaveFicticia()">¿Olvidaste tu contraseña?</a>
+      <button class="boton-amarillo ancho-total" onclick="simularLogin()">Entrar</button>
+    </div>
+  </div>
+
+  <div class="fondo-ventana" id="ventana-registro">
+    <div class="ventana">
+      <button class="boton-cerrar" onclick="ocultarVentana('ventana-registro')">✕</button>
+      <h2>Crear cuenta</h2>
+      <div class="campo">
+        <label>Nombre completo</label>
+        <input type="text" id="txt-reg-nombre" placeholder="Tu nombre" required />
+      </div>
+      <div class="campo">
+        <label>Correo electrónico</label>
+        <input type="email" placeholder="correo@ejemplo.com"/>
+      </div>
+      <div class="campo">
+        <label>Contraseña</label>
+        <input type="password" placeholder="Mínimo 8 caracteres" required/>
+      </div>
+      <button class="boton-amarillo ancho-total" onclick="simularRegistro()">Crear cuenta</button>
+    </div>
+  </div>
+
+  <div class="fondo-ventana" id="ventana-simulador">
+    <div class="ventana ventana-ancha">
+      <button class="boton-cerrar" onclick="ocultarVentana('ventana-simulador')">✕</button>
+      <h2>Simulador de examen</h2>
+      <p class="descripcion-ventana">Selecciona la categoría y número de preguntas para comenzar tu simulacro.</p>
+      <div class="campo">
+        <label>Categoría</label>
+        <select id="select-categoria">
+          <option>Todas las categorías</option>
+          <option>Examen general completo</option>
+          <option>Prueba de señales</option>
+          <option>Limites y velocidades</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label>Número de preguntas</label>
+        <select>
+          <option>10 preguntas</option>
+          <option>15 preguntas</option>
+          <option>30 preguntas (examen completo)</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label>Tiempo límite</label>
+        <select id="select-tiempo">
+          <option>Sin tiempo</option>
+          <option>20 minutos</option>
+          <option>40 minutos</option>
+        </select>
+      </div>
+      <button class="boton-amarillo ancho-total" onclick="var cat = document.getElementById('select-categoria').value; ocultarVentana('ventana-simulador'); alert('Redireccionando al área de simulacros para procesar: ' + cat); window.location.href='examenes.html';">Comenzar simulacro</button>
+    </div>
+  </div>
+
+  <div class="fondo-ventana" id="ventana-perfil">
+    <div class="ventana">
+      <button class="boton-cerrar" onclick="ocultarVentana('ventana-perfil')">✕</button>
+      <h2>Modificar Datos Personales</h2>
+      <p class="descripcion-ventana">Actualiza tu información personal en la plataforma académica.</p>
+      <div class="campo">
+        <label>Nombre Completo en Certificados</label>
+        <input type="text" id="txt-perfil-nombre" value="Estudiante Aprendiz" />
+      </div>
+      <div class="campo">
+        <label>Correo Electrónico Principal</label>
+        <input type="email" id="txt-perfil-email" value="NA" />
+      </div>
+      <div class="campo">
+        <label>Número Telefónico</label>
+        <input type="text" value="NA" />
+      </div>
+      <button class="boton-amarillo ancho-total" onclick="guardarDatosPersonales()">Guardar Cambios</button>
+    </div>
+  </div>
+
+  <div class="fondo-ventana" id="ventana-contacto">
+    <div class="ventana">
+      <button class="boton-cerrar" onclick="ocultarVentana('ventana-contacto')">✕</button>
+      <h2>Contáctanos</h2>
+      <div class="campo">
+        <label>Nombre</label>
+        <input type="text" placeholder="Tu nombre" />
+      </div>
+      <div class="campo">
+        <label>Correo</label>
+        <input type="email" placeholder="correo@ejemplo.com" />
+      </div>
+      <div class="campo">
+        <label>Mensaje</label>
+        <textarea placeholder="¿En qué te podemos ayudar?"></textarea>
+      </div>
+      <button class="boton-amarillo ancho-total" onclick="alert('Mensaje enviado con éxito.'); ocultarVentana('ventana-contacto');">Enviar mensaje</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
